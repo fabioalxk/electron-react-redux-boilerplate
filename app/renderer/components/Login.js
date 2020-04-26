@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import BottomNavbar from './BottomNavbar';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
+import { bindActionCreators } from 'redux';
+import userActions from '../actions/user';
 
-export default class Login extends Component {
+class Login extends Component {
   static propTypes = {
     onLogin: PropTypes.func.isRequired,
   };
@@ -29,7 +34,24 @@ export default class Login extends Component {
         <h2>Login</h2>
         <input onChange={this.handleChange} type="text" value={this.state.username} />
         <button onClick={this.handleLogin}>Log In</button>
+        <BottomNavbar />
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return state;
+};
+
+const mapDispatchToProps = (dispatch) => {
+  const user = bindActionCreators(userActions, dispatch);
+  return {
+    onLogin: (data) => {
+      user.login(data);
+      dispatch(push('/loggedin'));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

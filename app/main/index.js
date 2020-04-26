@@ -20,8 +20,8 @@ const installExtensions = async () => {
 };
 
 crashReporter.start({
-  productName: 'YourName',
-  companyName: 'YourCompany',
+  productName: 'Task Habit',
+  companyName: 'Wizia Dev',
   submitURL: 'https://your-domain.com/url-to-submit',
   uploadToServer: false,
 });
